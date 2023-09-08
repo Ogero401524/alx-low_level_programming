@@ -3,10 +3,9 @@
 /**
  *main - Entry
  *
- *Retuen always (0)
- *This is the main function. It is the entry point of the program.
+ *Return always (0)
  */
-int main(void)
+int main()
 {
 	puts("\"Programming is like building a multilingual puzzle");
 	return (0);
