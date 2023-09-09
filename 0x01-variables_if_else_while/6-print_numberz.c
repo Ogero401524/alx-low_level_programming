@@ -11,7 +11,7 @@ int main(void)
 
 	for (i = 49; i < 59; i++)
 	{
-		putchar("%d", i);
+		putchar('i');
 	}
 	putchar('\n');
 	return (0);
