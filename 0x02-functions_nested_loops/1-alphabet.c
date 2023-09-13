@@ -1,8 +1,9 @@
 #include "main.h"
 
 /**
- *print alphabet lowercse
- *return void
+ *print_alphabet
+ *
+ *Return: void
  */
 void print_alphabet(void)
 {
