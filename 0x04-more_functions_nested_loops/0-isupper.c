@@ -4,15 +4,13 @@
  *checks for uppercase character
  *Returns 1 if c is uppercase, zero otherwise
  */
-int main(void)
+int _isupper(int c)
 {
-	int _isupper(int c)
+	c = 'A';
+	if ('A' <= 'Z')
 	{
-		if (c = 'A' <= 'Z')
-		{
-			return (1);
-		}
-		else
-			return (0);
+		return (1);
 	}
+	else
+		return (0);
 }
