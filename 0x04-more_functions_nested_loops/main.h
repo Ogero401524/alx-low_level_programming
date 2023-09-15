@@ -1,5 +1,5 @@
-#ifndef main
-#define main
+#ifndef main_header
+#define main_header
 
 int _isupper(int c);
 
