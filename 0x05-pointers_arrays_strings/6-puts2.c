@@ -2,7 +2,6 @@
 /**
  *puts2 -  prints every other character of a string
  *@str: - is the string to be printed
- *Return: Always 0
  */
 void puts2(char *str)
 {
@@ -11,7 +10,7 @@ void puts2(char *str)
 	while (str[i] != '\0')
 	{
 		_putchar(str[i]);
-		i+= 2;
+		i += 2;
 	}
 	_putchar('\n');
 }
