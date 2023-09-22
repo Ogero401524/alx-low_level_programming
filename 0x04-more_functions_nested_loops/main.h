@@ -2,7 +2,7 @@
 #define main_header
 
 int _isupper(int c);
-int _atoi(char *s)
+int _atoi(char *s);
 int _putchar(char c);
 int _isdigit(int c);
 int mul(int a, int b);
