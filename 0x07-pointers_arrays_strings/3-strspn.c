@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "main.h"
 /**
  * _strspn - Entry point
@@ -23,5 +24,9 @@ unsigned int _strspn(char *s, char *accept)
 					confm = 1;
 				}
 			}
+		if (confm == 0)
+		{
+			break;
+		}
 	}
 }
