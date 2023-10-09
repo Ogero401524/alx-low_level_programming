@@ -1,9 +1,9 @@
 #include <stdio.h>
 /**
- *main - Entry
- *return 0
+ *main - Entry Point
+ *Return: Always 0 (success)
  */
-int main()
+int main(void)
 {
 	printf("%s\n", __FILE__);
 	return (0);
