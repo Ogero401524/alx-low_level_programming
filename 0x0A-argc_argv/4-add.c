@@ -1,64 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+
 /**
- * check_num - Entry point
- * @str: array str
- *
- * Return: Always 0 (Success)
+ * check_positive_number - Check if a string is a positive number.
+ * @str: The string to check.
+ * Return: 1 if it's a positive number, 0 otherwise.
  */
-int check_num(char *str)
-{
-	unsigned int count;
+int check_positive_number(const char *str) {
+    if (*str == '\0')
+        return 0;
 
-	caunt = 0;
-	while (caunt < strlen(str))
+    while (*str)
+    {
+        if (*str < '0' || *str > '9')
+            return 0;
+	else
+        str++;
+    }
 
-	{
-		if (!isdigit(str[caunt]))
-		{
-			return (0);
-		}
-
-		caunt++;
-	}
-	return (1);
+    return 1;
 }
 
-/**
- * main - Print the name of the program
- * @argc: Count arguments
- * @argv: Arguments
- *
- * Return: Always 0 (Success)
- */
+int main(int argc, char *argv[]) {
+    int sum = 0;
 
-int main(int argc, char *argv[])
+    if (argc == 1) {
+        printf("0\n");
+        return 0;
+    }
 
-{
-	int caunt;
-	int str_int;
-	int sam = 0;
+    for (int i = 1; i < argc; i++)
+    {
+        if (check_positive_number(argv[i])) {
+            sum += atoi(argv[i]);
+        } else {
+            printf("Error\n");
+            return 1;
+        }
+    }
 
-	caunt = 1;
-	while (caunt < argc)
-	{
-		if (check_num(argv[caunt]))
-
-		{
-			str_int = atoi(argv[caunt]);
-			sam += str_int;
-		}
-		else
-		{
-			printf("Error\n");
-			return (1);
-		}
-
-		caunt++;
-	}
-
-	printf("%d\n", sam);
-	return (0);
+    printf("%d\n", sum);
+    return 0;
 }
