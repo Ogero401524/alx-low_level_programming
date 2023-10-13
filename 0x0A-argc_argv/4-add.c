@@ -1,6 +1,22 @@
 #include <stdio.h>
 #include "main.h"
 /**
+ * custom_atoi - Convert a string to an integer.
+ * @str: The string to convert.
+ * Return: The converted integer.
+ */
+int _atoi(const char *str) {
+    int num = 0;
+    if (*str == '\0')
+	    return 0;
+    while (*str) {
+        num = num * 10 + (*str - '0');
+        str++;
+    }
+    return num;
+}
+
+/**
  * check_positive_number - Check if a string is a positive number.
  * @str: The string to check.
  * Return: 1 if it's a positive number, 0 otherwise.
@@ -19,18 +35,7 @@ int check_positive_number(const char *str) {
 
     return 1;
 }
-/**
- * custom_atoi - Convert a string to an integer.
- * @str: The string to convert.
- * Return: The converted integer.
- */
-int _atoi(const char *str) {
-    int num = 0;
-    while (*str) {
-        num = num * 10 + (*str - '0');
-        str++;
-    }
-    return num;
+
 }
 int main(int argc, char *argv[]) {
     int sum = 0;
