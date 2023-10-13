@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "main.h"
 /**
  * check_positive_number - Check if a string is a positive number.
  * @str: The string to check.
