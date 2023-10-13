@@ -37,17 +37,17 @@ int check_num(char *str)
 int main(int argc, char *argv[])
 
 {
-	int count;
+	int caunt;
 	int str_int;
 	int sam = 0;
 
-	count = 1;
-	while (count < argc)
+	caunt = 1;
+	while (caunt < argc)
 	{
-		if (check_num(argv[count]))
+		if (check_num(argv[caunt]))
 
 		{
-			str_int = atoi(argv[count]);
+			str_int = atoi(argv[caunt]);
 			sam += str_int;
 		}
 		else
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 			return (1);
 		}
 
-		count++;
+		caunt++;
 	}
 
 	printf("%d\n", sam);
