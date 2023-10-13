@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-
 /**
  * check_positive_number - Check if a string is a positive number.
  * @str: The string to check.
@@ -20,7 +18,19 @@ int check_positive_number(const char *str) {
 
     return 1;
 }
-
+/**
+ * custom_atoi - Convert a string to an integer.
+ * @str: The string to convert.
+ * Return: The converted integer.
+ */
+int _atoi(const char *str) {
+    int num = 0;
+    while (*str) {
+        num = num * 10 + (*str - '0');
+        str++;
+    }
+    return num;
+}
 int main(int argc, char *argv[]) {
     int sum = 0;
 
@@ -32,7 +42,7 @@ int main(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++)
     {
         if (check_positive_number(argv[i])) {
-            sum += atoi(argv[i]);
+            sum += _atoi(argv[i]);
         } else {
             printf("Error\n");
             return 1;
