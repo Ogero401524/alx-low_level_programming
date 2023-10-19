@@ -1,5 +1,6 @@
 #ifndef MAIN_SING
 #define MAIN_SING
+#include <stdio.h>
 /**
  * struct list_s - singly linked list
  * @str: string - (malloc'ed string)
