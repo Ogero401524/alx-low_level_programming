@@ -1,46 +1,51 @@
 #include <stdlib.h>
 
 /**
- * argstostr - Concatenates all the arguments of the program.
- * @ac: The number of arguments.
- * @av: An array of strings containing the arguments.
+ * argstostr - Concatenate all the arguments of the program
+ * @ac: The number of arguments
+ * @av: An array of strings (arguments)
  *
- * Return: A pointer to the concatenated string, or NULL if it fails.
+ * Return: A pointer to a new string, or NULL if it fails
  */
 char *argstostr(int ac, char **av)
 {
+	int i, j, k;
+	int len = 0;
+	char *str;
+
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
-	int i, j, length = 0;
-	char *concatenated;
-
 	for (i = 0; i < ac; i++)
 	{
-		for (j = 0; av[i][j]; j++)
-			length++;
-		length++;
+		for (j = 0; av[i][j] != '\0'; j++)
+		{
+			len++;
+		}
+		len++;
 	}
 
-	concatenated = (char *)malloc(sizeof(char) * (length + 1));
+	len++;
 
-	if (concatenated == NULL)
+	str = (char *)malloc(sizeof(char) * len);
+
+	if (str == NULL)
 		return (NULL);
 
-	int index = 0;
+	k = 0;
 
 	for (i = 0; i < ac; i++)
 	{
-		for (j = 0; av[i][j]; j++)
+		for (j = 0; av[i][j] != '\0'; j++)
 		{
-			concatenated[index] = av[i][j];
-			index++;
+			str[k] = av[i][j];
+			k++;
 		}
-		concatenated[index] = '\n';
-		index++;
+		str[k] = '\n';
+		k++;
 	}
 
-	concatenated[length] = '\0';
+	str[k] = '\0';
 
-	return (concatenated);
+	return (str);
 }
