@@ -1,84 +1,79 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int is_separator(char c)
-{
+bool is_space(char c) {
     return c == ' ' || c == '\t' || c == '\n';
 }
 
-int _count_words(char *str)
-{
+int _count_words(char *str) {
     int _count = 0;
-    int in_word = 0;
+    bool in_word = false;
 
-    while (*str)
-    {
-        if (is_separator(*str))
-        {
-            in_word = 0;
-        }
-        else if (!in_word)
-        {
+    while (*str) {
+        if (is_space(*str)) {
+            in_word = false;
+        } else if (!in_word) {
             _count++;
-            in_word = 1;
+            in_word = true;
         }
         str++;
     }
+
     return _count;
 }
 
-char **strtow(char *str)
-{
+char **strtow(char *str) {
     if (str == NULL || *str == '\0')
         return NULL;
 
-    int i, j, k, words;
-    char **result;
-    int in_word = 0;
-
-    words = _count_words(str);
+    int words = _count_words(str);
     if (words == 0)
         return NULL;
 
-    result = (char **)malloc((words + 1) * sizeof(char *));
+    char **result = (char **)malloc((words + 1) * sizeof(char *));
     if (result == NULL)
         return NULL;
 
-    for (i = 0; i < words; i++)
-    {
-        while (is_separator(*str))
-            str++;
+    int word_len = 0;
+    bool in_word = false;
+    int i = 0;
 
-        in_word = 1;
-        k = 0;
-        while (str[k] && !is_separator(str[k]))
-            k++;
+    while (*str) {
+        if (is_space(*str)) {
+            if (in_word) {
+                result[i] = (char *)malloc((word_len + 1) * sizeof(char));
+                if (result[i] == NULL) {
+                    for (int j = 0; j < i; j++) {
+                        free(result[j]);
+                    }
+                    free(result);
+                    return NULL;
+                }
+                word_len = 0;
+                i++;
+            }
+            in_word = false;
+        } else {
+            result[i][word_len++] = *str;
+            in_word = true;
+        }
+        str++;
+    }
 
-        result[i] = (char *)malloc((k + 1) * sizeof(char));
-        if (result[i] == NULL)
-        {
-            for (j = 0; j < i; j++)
+    if (in_word) {
+        result[i] = (char *)malloc((word_len + 1) * sizeof(char));
+        if (result[i] == NULL) {
+            for (int j = 0; j < i; j++) {
                 free(result[j]);
+            }
             free(result);
             return NULL;
         }
-
-        for (j = 0; j < k; j++)
-            result[i][j] = *str++;
-
-        result[i][k] = '\0';
+        i++;
     }
 
-    result[words] = NULL;
+    result[i] = NULL;
+
     return result;
-}
-
-void print_tab(char **tab)
-{
-    int i;
-
-    for (i = 0; tab[i] != NULL; i++)
-    {
-        printf("%s\n", tab[i]);
-    }
 }
