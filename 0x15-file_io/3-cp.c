@@ -1,23 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <fcntl.h>
-#include "main.h"
+#include <unistd.h>
 
 #define BUFFER_SIZE 1024
 
 /**
- * main - Copies the content of a file to another file.
+ * main - Copy the content of one file to another.
  * @argc: Number of arguments.
- * @argv: Array of arguments.
- *
- * Return: 0 on success, or the appropriate exit code on failure.
+ * @argv: Array of argument strings.
+ * Return: 0 on success, 97, 98, 99, or 100 on failure.
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
     int _fd_from, _fd_to;
-    ssize_t bytes_read, bytes_written;
-    char buffer[BUFFER_SIZE];
+    ssize_t _read_result, _write_result;
+    char _buffer[BUFFER_SIZE];
 
     if (argc != 3)
     {
@@ -32,7 +30,7 @@ int main(int argc, char **argv)
         return (98);
     }
 
-    _fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+    _fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
     if (_fd_to == -1)
     {
         dprintf(2, "Error: Can't write to file %s\n", argv[2]);
@@ -40,25 +38,24 @@ int main(int argc, char **argv)
         return (99);
     }
 
-    while ((bytes_read = read(_fd_from, buffer, BUFFER_SIZE)) > 0)
-    {
-        bytes_written = write(_fd_to, buffer, bytes_read);
-        if (bytes_written == -1)
+    do {
+        _read_result = read(_fd_from, _buffer, BUFFER_SIZE);
+        if (_read_result == -1)
+        {
+            dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+            close(_fd_from);
+            close(_fd_to);
+            return (98);
+        }
+        _write_result = write(_fd_to, _buffer, _read_result);
+        if (_write_result == -1)
         {
             dprintf(2, "Error: Can't write to file %s\n", argv[2]);
             close(_fd_from);
             close(_fd_to);
             return (99);
         }
-    }
-
-    if (bytes_read == -1)
-    {
-        dprintf(2, "Error: Can't read from file %s\n", argv[1]);
-        close(_fd_from);
-        close(_fd_to);
-        return (98);
-    }
+    } while (_read_result > 0);
 
     if (close(_fd_from) == -1)
     {
