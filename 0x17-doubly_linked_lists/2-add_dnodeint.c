@@ -10,7 +10,7 @@ dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 {
 	dlistint_t *forceElementfirst = malloc(sizeof(dlistint_t));
 
-	if (forceElementfirst)
+	if (forceElementfirst == NULL)
 		return (NULL);
 
 	forceElementfirst->n = n;
