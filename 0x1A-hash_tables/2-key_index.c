@@ -1,3 +1,4 @@
+#include "hash_tables.h"
 /**
  * key_index - Computes the index of a key in a hash table.
  * @key: The key to be hashed.
