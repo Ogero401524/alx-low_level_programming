@@ -11,6 +11,9 @@
  * @argv: Array of argument strings.
  * Return: 0 on success, 97, 98, 99, or 100 on failure.
  */
+/**
+ *File descriptors and permissions
+ */
 int main(int argc, char *argv[])
 {
     int _fd_from, _fd_to;
